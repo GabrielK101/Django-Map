@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'base/style.css' %}">
+    <title>Map</title>
+
+    {% load static %}<link rel = "icon" href ="{% static 'base/images/mapmarkericon.png' %}" type = "image/x-icon">
+  </head>
+  <body>
+    <div class="map">
+      {{ m|safe }}
+    </div>
+
+  </body>
+</html>
