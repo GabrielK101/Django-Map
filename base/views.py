@@ -11,7 +11,9 @@ def map(request):
 
     users = response.json()
 
-    m = folium.Map(location=[0,0], zoom_start=2)
+    m = folium.Map(location=[0, 0], zoom_start=2, max_bounds=True)
+
+    cords = []
 
     for user in users:
         name = user['name']
@@ -19,6 +21,16 @@ def map(request):
         lng = user['lng']
 
         folium.Marker([lat, lng], tooltip=name, popup=f"Latitude:{lat}, Longitude:{lng}").add_to(m)
+
+        cords.append((user['lat'],user['lng']))
+        #[(8.2, 7.3), (9.2, 7.4), (-1.2, 36.8), (9.2, 1.8)]
+
+    folium.Polygon(cords,
+                   color="black",
+                   weight=2,
+                   fill=True,
+                   fill_color="orange",
+                   fill_opacity=0.1).add_to(m)
 
     m = m._repr_html_()
 
